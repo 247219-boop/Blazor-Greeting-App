@@ -1,0 +1,36 @@
+@page "/greeting"
+@rendermode InteractiveServer
+
+<PageTitle>Greeting App</PageTitle>
+
+<div class="container">
+
+    <div class="card">
+
+        <h2>👋 Greeting App</h2>
+
+        <label>Enter Your Name</label>
+
+        <!-- Two-way binding -->
+        <input @bind="userName"
+               @bind:event="oninput"
+               placeholder="Type your name..."
+               class="input" />
+
+        <!-- One-way binding -->
+        <div class="result">
+            @GreetingMessage
+        </div>
+
+    </div>
+
+</div>
+
+@code {
+    private string userName = "";
+
+    private string GreetingMessage =>
+        string.IsNullOrWhiteSpace(userName)
+            ? "Please enter your name"
+            : $"Hello {userName}! Welcome 🎉";
+}
