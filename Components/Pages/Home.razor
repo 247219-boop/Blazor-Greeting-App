@@ -1,7 +1,118 @@
-﻿@page "/"
+﻿
+@page "/"
+@rendermode InteractiveServer
 
 <PageTitle>Home</PageTitle>
 
-<h1>Hello, world!</h1>
+<div class="home-wrapper">
 
-Welcome to your new app.
+    <div class="home-hero">
+        <div class="hero-icon">👋</div>
+        <h1>App 1</h1>
+        <p>One-Way & Two-Way Data Binding in Blazor</p>
+    </div>
+
+    <div class="nav-cards">
+        <a href="/greeting" class="nav-card greeting-card">
+            <span class="card-icon">💬</span>
+            <div>
+                <strong>Greeting Component</strong>
+                <p>Enter your name and get a personalized greeting</p>
+            </div>
+            <span class="arrow">→</span>
+        </a>
+    </div>
+
+    <div class="info-grid">
+        <div class="info-item">
+            <span class="info-icon">🔄</span>
+            <div>
+                <strong>Two-Way Binding</strong>
+                <p>@@bind on input field syncs value between C# and HTML instantly</p>
+            </div>
+        </div>
+        <div class="info-item">
+            <span class="info-icon">➡️</span>
+            <div>
+                <strong>One-Way Binding</strong>
+                <p>@@GreetingMessage reads from C# — DOM cannot modify it</p>
+            </div>
+        </div>
+        <div class="info-item">
+            <span class="info-icon">⚡</span>
+            <div>
+                <strong>oninput Event</strong>
+                <p>Greeting updates live on every keystroke without clicking</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<style>
+    body { background: #0f172a !important; }
+
+    .home-wrapper {
+        max-width: 540px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+        font-family: 'Segoe UI', sans-serif;
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+    }
+
+    .home-hero {
+        background: linear-gradient(135deg, #6366f1, #a855f7);
+        border-radius: 24px;
+        padding: 2.5rem 2rem;
+        text-align: center;
+        color: white;
+        box-shadow: 0 8px 32px rgba(99,102,241,0.4);
+    }
+    .hero-icon    { font-size: 3rem; }
+    .home-hero h1 { margin: 0.25rem 0; font-size: 2rem; font-weight: 800; }
+    .home-hero p  { margin: 0; opacity: 0.85; font-size: 0.9rem; }
+
+    .nav-cards { display: flex; flex-direction: column; gap: 0.75rem; }
+
+    .nav-card {
+        background: #1e293b;
+        border: 1px solid #334155;
+        border-radius: 16px;
+        padding: 1.25rem 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        text-decoration: none;
+        transition: all 0.2s;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    .nav-card:hover            { transform: translateX(4px); }
+    .greeting-card:hover       { border-color: #6366f1; }
+    .greeting-card:hover .arrow { color: #6366f1; }
+
+    .card-icon { font-size: 1.75rem; flex-shrink: 0; }
+    .nav-card div    { flex: 1; }
+    .nav-card strong { display: block; color: #f1f5f9; font-size: 1rem; margin-bottom: 0.2rem; }
+    .nav-card p      { margin: 0; color: #64748b; font-size: 0.82rem; }
+    .arrow { color: #475569; font-size: 1.2rem; transition: color 0.2s; }
+
+    .info-grid { display: flex; flex-direction: column; gap: 0.75rem; }
+
+    .info-item {
+        background: #1e293b;
+        border: 1px solid #334155;
+        border-radius: 16px;
+        padding: 1rem 1.25rem;
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    .info-icon { font-size: 1.5rem; flex-shrink: 0; margin-top: 2px; }
+    .info-item strong { display: block; color: #f1f5f9; font-size: 0.95rem; margin-bottom: 0.25rem; }
+    .info-item p      { margin: 0; color: #64748b; font-size: 0.82rem; }
+</style>
+
+@code { }

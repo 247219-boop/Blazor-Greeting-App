@@ -3,34 +3,189 @@
 
 <PageTitle>Greeting App</PageTitle>
 
-<div class="container">
+<div class="greeting-wrapper">
 
-    <div class="card">
+    <div class="greeting-hero">
+        <div class="hero-icon">👋</div>
+        <h1>Greeting Component</h1>
+        <p>One-Way & Two-Way Data Binding Demo</p>
+    </div>
 
-        <h2>👋 Greeting App</h2>
+    <div class="greeting-card">
 
-        <label>Enter Your Name</label>
+        <div class="field-group">
+            <label>✏️ Enter Your Name</label>
+            <div class="badge-row">
+                <span class="binding-badge two-way">🔄 Two-Way Binding</span>
+            </div>
+            <!-- TWO-WAY BINDING -->
+            <input @bind="userName"
+                   @bind:event="oninput"
+                   placeholder="Type your name here..."
+                   class="name-input" />
+        </div>
 
-        <!-- Two-way binding -->
-        <input @bind="userName"
-               @bind:event="oninput"
-               placeholder="Type your name..."
-               class="input" />
-
-        <!-- One-way binding -->
-        <div class="result">
-            @GreetingMessage
+        <!-- ONE-WAY BINDING -->
+        <div class="result-section">
+            <div class="badge-row">
+                <span class="binding-badge one-way">➡️ One-Way Binding</span>
+            </div>
+            @if (string.IsNullOrWhiteSpace(userName))
+            {
+                <div class="result-empty">
+                    <span>Start typing your name above...</span>
+                </div>
+            }
+            else
+            {
+                <div class="result-filled">
+                    <span class="greeting-text">@GreetingMessage</span>
+                </div>
+            }
         </div>
 
     </div>
 
+    <div class="info-grid">
+        <div class="info-item two-way-item">
+            <span class="info-icon">🔄</span>
+            <div>
+                <strong>Two-Way Binding</strong>
+                <p>@@bind="userName" with oninput — input reads AND writes userName on every keystroke</p>
+            </div>
+        </div>
+        <div class="info-item one-way-item">
+            <span class="info-icon">➡️</span>
+            <div>
+                <strong>One-Way Binding</strong>
+                <p>@@GreetingMessage is a computed C# property — Blazor reads it, DOM cannot change it</p>
+            </div>
+        </div>
+    </div>
+
 </div>
 
+<style>
+    body { background: #0f172a !important; }
+
+    .greeting-wrapper {
+        max-width: 540px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+        font-family: 'Segoe UI', sans-serif;
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+    }
+
+    .greeting-hero {
+        background: linear-gradient(135deg, #6366f1, #a855f7);
+        border-radius: 24px;
+        padding: 2.5rem 2rem;
+        text-align: center;
+        color: white;
+        box-shadow: 0 8px 32px rgba(99,102,241,0.4);
+    }
+    .hero-icon        { font-size: 3rem; }
+    .greeting-hero h1 { margin: 0.25rem 0; font-size: 1.9rem; font-weight: 800; }
+    .greeting-hero p  { margin: 0; opacity: 0.85; font-size: 0.9rem; }
+
+    .greeting-card {
+        background: #1e293b;
+        border: 1px solid #334155;
+        border-radius: 20px;
+        padding: 1.75rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+
+    .field-group { display: flex; flex-direction: column; gap: 0.6rem; }
+
+    .field-group label {
+        color: #94a3b8;
+        font-size: 0.82rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .badge-row { display: flex; gap: 0.5rem; }
+
+    .binding-badge {
+        border-radius: 20px;
+        padding: 0.25rem 0.75rem;
+        font-size: 0.75rem;
+        font-weight: 700;
+    }
+    .two-way { background: rgba(99,102,241,0.15); color: #a5b4fc; border: 1px solid rgba(99,102,241,0.3); }
+    .one-way  { background: rgba(16,185,129,0.15); color: #6ee7b7; border: 1px solid rgba(16,185,129,0.3); }
+
+    .name-input {
+        background: #0f172a;
+        border: 2px solid #334155;
+        border-radius: 12px;
+        padding: 0.85rem 1rem;
+        color: #f1f5f9;
+        font-size: 1rem;
+        outline: none;
+        transition: border-color 0.2s;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    .name-input:focus        { border-color: #6366f1; }
+    .name-input::placeholder { color: #475569; }
+
+    .result-section { display: flex; flex-direction: column; gap: 0.6rem; }
+
+    .result-empty {
+        background: #0f172a;
+        border: 2px dashed #334155;
+        border-radius: 12px;
+        padding: 1.25rem;
+        text-align: center;
+        color: #475569;
+        font-size: 0.9rem;
+    }
+
+    .result-filled {
+        background: linear-gradient(135deg, rgba(99,102,241,0.15), rgba(168,85,247,0.15));
+        border: 2px solid rgba(99,102,241,0.4);
+        border-radius: 12px;
+        padding: 1.25rem;
+        text-align: center;
+    }
+
+    .greeting-text {
+        color: #c4b5fd;
+        font-size: 1.15rem;
+        font-weight: 700;
+    }
+
+    .info-grid { display: flex; flex-direction: column; gap: 0.75rem; }
+
+    .info-item {
+        border-radius: 14px;
+        padding: 1rem 1.25rem;
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
+        border: 1px solid transparent;
+    }
+    .info-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 2px; }
+    .info-item strong { display: block; font-size: 0.9rem; margin-bottom: 0.2rem; }
+    .info-item p { margin: 0; font-size: 0.8rem; opacity: 0.8; }
+
+    .two-way-item { background: rgba(99,102,241,0.1); border-color: rgba(99,102,241,0.25); color: #a5b4fc; }
+    .one-way-item { background: rgba(16,185,129,0.1); border-color: rgba(16,185,129,0.25); color: #6ee7b7; }
+</style>
+
 @code {
-    private string userName = "";
+    private string userName = string.Empty;
 
     private string GreetingMessage =>
         string.IsNullOrWhiteSpace(userName)
-            ? "Please enter your name"
-            : $"Hello {userName}! Welcome 🎉";
-}
+            ? string.Empty
+            : $"Hello, {userName}! Welcome to Blazor 🎉";
+} 
